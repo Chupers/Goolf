@@ -6,7 +6,6 @@ public class ShotAction : MonoBehaviour
 {
     Rigidbody rigidbody;
     public float forse = 50f;
-    public TrajectoryRenderer trajectoryRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +24,8 @@ public class ShotAction : MonoBehaviour
             {
                 
                 Vector3 targetPosition = hitInfo.point;
-                Vector3 direction = rigidbody.transform.position - targetPosition * forse;
-                trajectoryRenderer.ShowTrajectory(transform.position, direction);
-                rigidbody.AddForce(direction.normalized, ForceMode.VelocityChange);
+                Vector3 direction = rigidbody.transform.position - targetPosition;
+                rigidbody.AddForce(direction.normalized * forse, ForceMode.VelocityChange);
             }
         }
     }
