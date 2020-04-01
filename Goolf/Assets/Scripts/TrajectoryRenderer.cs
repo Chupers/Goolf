@@ -32,4 +32,8 @@ public class TrajectoryRenderer : MonoBehaviour
 
         lineRenderer.SetPositions(points);
     }
+    public void hideTrajectory()
+    {
+        Destroy(lineRenderer);
+    }
 }

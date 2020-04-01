@@ -124,7 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forse: 40
-  trajectoryRenderer: {fileID: 0}
+  trajectoryRendererPrefab: {fileID: 1762140807322795615, guid: 3183c3bee3041db40ac3e7c6b20c6abd,
+    type: 3}
 --- !u!120 &1584499209464834933
 LineRenderer:
   m_ObjectHideFlags: 0
