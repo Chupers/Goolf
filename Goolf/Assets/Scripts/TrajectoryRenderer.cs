@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TrajectoryRenderer : MonoBehaviour
 {
-    public GameObject gameObject;
-
     private LineRenderer lineRenderer;
 
     // Start is called before the first frame update
@@ -14,28 +12,24 @@ public class TrajectoryRenderer : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    public void ShowTrajectory(Vector3 vector, Vector3 direction)
+    public void ShowTrajectory(Vector3 origin, Vector3 direction)
     {
-        GameObject gameObject = Instantiate(this.gameObject, vector, Quaternion.identity);
-        gameObject.GetComponent<Rigidbody>().AddForce(direction.normalized, ForceMode.VelocityChange);
-
-        Physics.autoSimulation = false;
-
-        //simulation
 
         Vector3[] points = new Vector3[100];
+        lineRenderer.positionCount = points.Length;
 
         for(int i = 0; i < points.Length;i++)
         {
-            Physics.Simulate(0.1f);
-            points[i] = gameObject.transform.position;
+            float time = i * 0.1f;
+            points[i] = origin + direction * time + Physics.gravity * time * time / 2f;
+
+            if(points[i].y < 0)
+            {
+                lineRenderer.positionCount = i + 1;
+                break;
+            }
         }
 
         lineRenderer.SetPositions(points);
-
-        Physics.autoSimulation = true;
-
-        Destroy(gameObject);
-
     }
 }
